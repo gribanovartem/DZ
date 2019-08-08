@@ -1,0 +1,25 @@
+.buttons {
+    display: flex;
+    justify-content: center;
+}
+button {
+    margin: 10px;
+    width: 200px;
+    height: 50px;
+}
+.parentDiv {
+    width: 510px;
+    height: 539px;
+    border: 1px solid black;
+    margin: 0 auto;
+}
+div>div {
+    width: 15px;
+    height: 15px;
+    display: inline-block;
+    border: 1px solid black;
+    margin-bottom: -3px;
+}
+.true {
+    background-color: cornflowerblue;
+}
