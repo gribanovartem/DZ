@@ -10,18 +10,24 @@ function matrix(rows, cols, defaultValue){
     return arr;
 }
 function setGrid() {
-    var arr1 = matrix(30, 30, false);
+    var x=1;
+    var y=30;
     const parentDiv = document.querySelector('div');
-    for(let i=0; i<arr1.length; i++) {
-        for(let j=0; j<arr1[i].length; j++) {
-            let cell = document.createElement('div');
-            cell.setAttribute('posX', j);
-            cell.setAttribute('posY', i);
-            cell.classList.add(arr1[i][j]);
-            parentDiv.appendChild(cell);
+    for(let i=0; i<900; i++) {
+        if(x>30) {
+            x=1;
+            y--;   
+        }
+        let cell = document.createElement('div');
+        cell.setAttribute('posX', x);
+        cell.setAttribute('posY', y);
+        cell.classList.add('false');
+        parentDiv.appendChild(cell);
+        x++;
         }
     }
-}
+    console.log();
+
 setGrid();
 // console.log(arr1);
 function reset() {
@@ -29,7 +35,7 @@ function reset() {
 }
 
 function startRandom() {
-    var countAliveCell = randomDiap(1,30);
+    var countAliveCell = randomDiap(1,900);
     for(let i=0; i<countAliveCell; i++) {
         let positionX = randomDiap(1,30);
         let positionY = randomDiap(1,30);
