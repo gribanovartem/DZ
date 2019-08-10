@@ -6,6 +6,7 @@ button {
     margin: 10px;
     width: 200px;
     height: 50px;
+    cursor: pointer;
 }
 .parentDiv {
     width: 510px;
@@ -19,6 +20,7 @@ div>div {
     display: inline-block;
     border: 1px solid black;
     margin-bottom: -3px;
+    cursor: pointer;
 }
 .true {
     background-color: cornflowerblue;

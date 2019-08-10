@@ -1,14 +1,3 @@
-function matrix(rows, cols, defaultValue){
-    var arr = [];
-    for(var i=0; i<rows; i++){
-        arr.push([]);
-        arr[i].push(new Array(cols));
-        for(var j=0; j< cols; j++){
-          arr[i][j] = defaultValue;
-        }
-    }
-    return arr;
-}
 function setGrid() {
     var x=1;
     var y=30;
@@ -18,12 +7,13 @@ function setGrid() {
             x=1;
             y--;   
         }
-        let cell = document.createElement('div');
+        var cell = document.createElement('div');
         cell.setAttribute('posX', x);
         cell.setAttribute('posY', y);
         cell.classList.add('false');
         parentDiv.appendChild(cell);
         x++;
+        
         }
     }
     console.log();
@@ -46,9 +36,9 @@ function startRandom() {
     }
 }
 function nextGeneration() {
-    const allCells = document.getElementsByClassName('cell');
-    
-    for(let i=1; i<=allCells.length; i++) {
+    const allCells = document.querySelectorAll('div>div');
+    let newArr = [];
+    for(let i=0; i<allCells.length; i++) {
         let posX = allCells[i].getAttribute('posX');
         let posY = allCells[i].getAttribute('posY');
         let count = 0;
@@ -61,24 +51,79 @@ function nextGeneration() {
                         document.querySelector('[posX="' + (+posX)+'"][posY="' + (+posY-1)+'"]'),
                         document.querySelector('[posX="' + (+posX+1)+'"][posY="' + (+posY-1)+'"]')
         ];
-        for(let j=0; j<allneighbour.length; i++) {
-            if(allneighbour[j].classList.contains('true')) {
+        for(let j=0; j<allneighbour.length; j++) {
+            if(allneighbour[j]!==null && allneighbour[j].classList.contains('true')) {
                 count++;
             }
         }
+        if(allCells[i].classList.contains('false') && count===3) {
+            newArr.push('true');
+        }
+         else if((allCells[i].classList.contains('true') && count<2)||(allCells[i].classList.contains('true') && count>3)) {
+            newArr.push('false');
+        }
+        else {
+            newArr.push(allCells[i].className);
+        }
         
+       
+    }
+    let count1 = 0;
+    for(let i=0; i<allCells.length; i++) {
+        if(allCells[i].className !==newArr[i]) {
+            count1++;
+        }
+        if(allCells[i].classList.contains('true')) {
+            allCells[i].classList.remove('true');
+            allCells[i].classList.add(newArr[i]);
+        }
+        if(allCells[i].classList.contains('false')) {
+            allCells[i].classList.remove('false');
+            allCells[i].classList.add(newArr[i]);
+        }
+    }
+    if(count1==0) {
+        clearInterval();
+    }
+    // console.log(count1);
+    return count1;
+}
+
+function clickCell(cell) {
+    const allCells = document.querySelectorAll('div>div');
+    for(let i=0; i<allCells.length; i++) {
+        allCells[i].addEventListener("click", ()=> {
+            if(allCells[i].classList.contains('true')) {
+                allCells[i].classList.remove('true');
+                allCells[i].classList.add('false');
+            }
+            if(allCells[i].classList.contains('false')) {
+                allCells[i].classList.remove('false');
+                allCells[i].classList.add('true');
+            }
+        });
         
     }
-    console.log();
-
 }
-nextGeneration();
+clickCell();
+
+function startGame() {
+   setInterval(nextGeneration, 0.000001);
+}
+function setGlider() {
+    document.querySelector('[posX="3"][posY="28"]').classList.remove('false');
+    document.querySelector('[posX="3"][posY="28"]').classList.add('true');
+    document.querySelector('[posX="2"][posY="28"]').classList.remove('false');
+    document.querySelector('[posX="2"][posY="28"]').classList.add('true');
+    document.querySelector('[posX="1"][posY="28"]').classList.remove('false');
+    document.querySelector('[posX="1"][posY="28"]').classList.add('true');
+    document.querySelector('[posX="3"][posY="29"]').classList.remove('false');
+    document.querySelector('[posX="3"][posY="29"]').classList.add('true');
+    document.querySelector('[posX="2"][posY="30"]').classList.remove('false');
+    document.querySelector('[posX="2"][posY="30"]').classList.add('true');
+}
 
 function randomDiap(n,m) {
     return Math.floor(Math.random()*(m-n+1))+n;
 }
 
-// function aaa() {
-//     console.log(document.querySelectorAll('div[posx="1", posy="2"]'));
-// }
-// aaa();
