@@ -1,3 +1,5 @@
+// В цикле от 0 до 900 создаётся сетка дивов 30х30,
+//  каждому из них в атрибуты записывается позиция по "х" и "у" и класс "false"
 function setGrid() {
     var x=1;
     var y=30;
@@ -19,7 +21,6 @@ function setGrid() {
     console.log();
 
 setGrid();
-// console.log(arr1);
 function reset() {
     document.location.reload(true);
 }
@@ -35,6 +36,11 @@ function startRandom() {
         
     }
 }
+// циклом перебираем все клетки,
+//  внутри ещё один цикл по 8 соседям,
+//   затем в зависимости от кол-ва живых соседей в новый массив(newArr) пушим true либо false.
+//    Потом циклом пробегаем по всем клеткам и сравниваем их класс  с "iтым" элементом массива(newArr),
+//     если разные, меняем класс клетки.
 function nextGeneration() {
     const allCells = document.querySelectorAll('div>div');
     let newArr = [];
@@ -70,7 +76,7 @@ function nextGeneration() {
     }
     let count1 = 0;
     for(let i=0; i<allCells.length; i++) {
-        if(allCells[i].className !==newArr[i]) {
+        if(allCells[i].className !== newArr[i]) {
             count1++;
         }
         if(allCells[i].classList.contains('true')) {
@@ -85,10 +91,10 @@ function nextGeneration() {
     if(count1==0) {
         clearInterval();
     }
-    // console.log(count1);
     return count1;
 }
 
+// Эта функция меняет состояние клетки по клику
 function clickCell(cell) {
     const allCells = document.querySelectorAll('div>div');
     for(let i=0; i<allCells.length; i++) {
@@ -108,8 +114,9 @@ function clickCell(cell) {
 clickCell();
 
 function startGame() {
-   setInterval(nextGeneration, 0.000001);
+   setInterval(nextGeneration, 100);
 }
+// Глайдер
 function setGlider() {
     document.querySelector('[posX="3"][posY="28"]').classList.remove('false');
     document.querySelector('[posX="3"][posY="28"]').classList.add('true');
