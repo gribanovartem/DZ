@@ -1,10 +1,10 @@
 
 let allImg = document.getElementsByTagName('img');
 var dragImg;
+document.addEventListener('mousemove', mousemove, false);
 for(let i=0; i<allImg.length; i++) {
     allImg[i].style.position = 'absolute';
     allImg[i].addEventListener('mousedown', mousedown, false);
-    allImg[i].addEventListener('mousemove', mousemove, false);
     allImg[i].addEventListener('mouseup', mouseup, false);
 }
 var clickX;
@@ -15,7 +15,7 @@ function mousedown(EO) {
     EO.preventDefault();
     let imgPos = getElementPos(this);
     dragImg  = this;
-
+    document.body.appendChild(this);
     clickX=Math.round(EO.pageX-imgPos.left);
     clickY=Math.round(EO.pageY-imgPos.top);
     index++;
