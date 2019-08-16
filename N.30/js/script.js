@@ -2,7 +2,7 @@
 function dragNdrop() {
     let allImg = document.getElementsByTagName('img');
     var dragImg;
-    document.body.addEventListener('mousemove', mousemove, false);
+    document.addEventListener('mousemove', mousemove, false);
     let posArr = [];
     for(let j=0; j<allImg.length; j++) {
         let imgPosition = getElementPos(allImg[j]);
