@@ -1,6 +1,7 @@
 const clockRadius = 250; // Радиус циферблата
+
 function setClockBody() {
-    let clockFace = document.createElement('div');
+    let clockFace = document.createElement('div'); // Сам циферблат
     clockFace.style.backgroundColor = '#FCCA66';
     clockFace.style.width = (clockRadius*2)+'px';
     clockFace.style.height = (clockRadius*2)+'px';
@@ -9,7 +10,8 @@ function setClockBody() {
     clockFace.style.top = '10%';
     clockFace.style.left = '50%';
     clockFace.style.marginLeft = -clockRadius + 'px';
-    let timeNow = document.createElement('span');
+    
+    let timeNow = document.createElement('span'); // Цифровое время 
     timeNow.style.position = 'absolute';
     timeNow.style.textAlign = 'center';
     timeNow.style.fontWeight = 'bold';
@@ -19,7 +21,8 @@ function setClockBody() {
     timeNow.style.left = '50%';
     timeNow.style.marginLeft = -clockRadius/4 + 'px';
     clockFace.appendChild(timeNow);
-    let center = document.createElement('div');
+    
+    let center = document.createElement('div'); // Точка в центре циферблата
     center.style.position = 'absolute';
     center.style.top = clockRadius+'px';
     center.style.left = clockRadius+'px';
@@ -31,7 +34,7 @@ function setClockBody() {
         let hour = document.createElement('span');
         hour.style.position = 'absolute';
         let radiusHour = clockRadius/4/2; // Радиус зеленого круга с цифрой
-        let hourPos = clockRadius*0.8;
+        let hourPos = clockRadius*0.8; 
         hour.style.top = hourPos * Math.sin(angle)-radiusHour + 'px';
         hour.style.left = hourPos * Math.cos(angle)-radiusHour + 'px';
         hour.style.width = (clockRadius/4)+'px';
@@ -47,6 +50,42 @@ function setClockBody() {
         center.appendChild(hour);
     }
 
+    let hourArrow = document.createElement('span'); // Часовая стрелка
+    hourArrow.setAttribute('id','hourArrow');
+    hourArrow.style.position = 'absolute';
+    hourArrow.style.top = -clockRadius/2*0.9 + 'px';
+    hourArrow.style.left = -clockRadius/25/2 + 'px';
+    hourArrow.style.width = clockRadius/25 + 'px';
+    hourArrow.style.height = clockRadius/2 + 'px';
+    hourArrow.style.borderRadius = '1em';
+    hourArrow.style.backgroundColor = '#000';
+    hourArrow.style.transformOrigin = '50% 90%';
+    center.appendChild(hourArrow);
+
+    let minutesArrow = document.createElement('span'); // Минутная стрелка
+    minutesArrow.setAttribute('id','minutesArrow');
+    minutesArrow.style.position = 'absolute';
+    minutesArrow.style.top = -clockRadius/1.5*0.9 + 'px';
+    minutesArrow.style.left = -clockRadius/35/2 + 'px';
+    minutesArrow.style.width = clockRadius/35 + 'px';
+    minutesArrow.style.height = clockRadius/1.5 + 'px';
+    minutesArrow.style.borderRadius = '1em';
+    minutesArrow.style.backgroundColor = '#000';
+    minutesArrow.style.transformOrigin = '50% 90%';
+    center.appendChild(minutesArrow);
+
+    let secondsArrow =document.createElement('span'); // Секундная стрелка
+    secondsArrow.setAttribute('id','secondsArrow');
+    secondsArrow.style.position = 'absolute';
+    secondsArrow.style.top = -clockRadius/1.2*0.9 + 'px';
+    secondsArrow.style.left = -clockRadius/50/2 + 'px';
+    secondsArrow.style.width = clockRadius/50 + 'px';
+    secondsArrow.style.height = clockRadius/1.2 + 'px';
+    secondsArrow.style.borderRadius = '1em';
+    secondsArrow.style.backgroundColor = '#000';
+    secondsArrow.style.transformOrigin = '50% 90%';
+    center.appendChild(secondsArrow);
+
     document.body.appendChild(clockFace);
 }
 setClockBody();
@@ -56,10 +95,20 @@ function setTime() {
     let hours = justNow.getHours();
     let minutes = justNow.getMinutes();
     let seconds = justNow.getSeconds();
+    let milliseconds = justNow.getMilliseconds();
     let timeNow = str0l(hours,2) + ':' + str0l(minutes,2) + ':' + str0l(seconds,2);
     let clockSpan = document.querySelector('span');
     clockSpan.innerHTML = timeNow;
+    let hourArrow = document.getElementById('hourArrow');
+    let currHours = hours>12?hours-12:hours;
+    hourArrow.style.transform = 'rotate(' + (currHours*360/12) + 'deg)';
+    let minutesArrow = document.getElementById('minutesArrow');
+    minutesArrow.style.transform = 'rotate(' + (minutes*360/60) + 'deg)';
+    let secondsArrow = document.getElementById('secondsArrow');
+    secondsArrow.style.transform = 'rotate(' + ((milliseconds+(seconds*1000))*360/60/1000) + 'deg)';
 }
+
+
 function formatDateTime() {
     var hours=this.getHours();
     var minutes=this.getMinutes();
