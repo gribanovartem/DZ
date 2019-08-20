@@ -89,7 +89,9 @@ function setClockBody() {
     document.body.appendChild(clockFace);
 }
 setClockBody();
+setTime();
 setInterval(setTime,1000);
+
 function setTime() {
     let justNow = new Date();
     let hours = justNow.getHours();
@@ -105,7 +107,7 @@ function setTime() {
     let minutesArrow = document.getElementById('minutesArrow');
     minutesArrow.style.transform = 'rotate(' + (minutes*360/60) + 'deg)';
     let secondsArrow = document.getElementById('secondsArrow');
-    secondsArrow.style.transform = 'rotate(' + ((milliseconds+(seconds*1000))*360/60/1000) + 'deg)';
+    secondsArrow.style.transform = 'rotate(' + ((milliseconds+(seconds*1000)+(minutes*60000))*360/60/1000) + 'deg)';
     secondsArrow.style.transition = 'all 1s linear';
 }
 
