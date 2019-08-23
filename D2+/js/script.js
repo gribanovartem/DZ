@@ -83,12 +83,69 @@ function setResizeElem() {
     resize[6].style.left = imgPos.left + 'px';
     resize[6].style.top = imgPos.top + imgOfH - 15 + 'px';
     resize[7].style.left = imgPos.left + 'px';
-    resize[7].style.top = imgPos.top + imgOfH/2 - 5 + 'px';
-
-
-
-    
-    
-    
+    resize[7].style.top = imgPos.top + imgOfH/2 - 5 + 'px'; 
 }
 setResizeElem();
+var dragImg;
+var clickX;
+var clickY;
+let resizeItems = document.getElementsByClassName('resize');
+for(let i=0; i<8; i++) {
+    resizeItems[i].addEventListener('mousedown', mousedown, false);
+    resizeItems[i].addEventListener('mouseup', mouseup, false);
+}
+resizeItems[1].addEventListener('mousemove', resize1, false);
+resizeItems[5].addEventListener('mousemove', resize5, false);
+
+function resize1(EO) {
+    EO=EO||window.event;
+    EO.preventDefault();
+    if(dragImg) {
+        let img = document.querySelector('img');
+        dragImg.style.cursor = 'move';
+        let imgPos1 = getElementPos(dragImg);
+        var clickX1=EO.pageX-imgPos1.left;
+        var clickY1=EO.pageY-imgPos1.top;
+        dragImg.style.top = clickY1+imgPos1.top-clickY+'px';
+        // dragImg.style.left = clickX1+imgPos1.left-clickX+'px';
+        img.style.top = clickY1+imgPos1.top-clickY+'px';
+        let imgOfW = img.offsetWidth;
+        img.style.width = imgOfW+'px';
+        img.style.height = img.offsetHeight-clickY1+clickY+'px';
+        
+    }
+}
+function resize5(EO) {
+    EO=EO||window.event;
+    EO.preventDefault();
+    if(dragImg) {
+        let img = document.querySelector('img');
+        dragImg.style.cursor = 'move';
+        let imgPos1 = getElementPos(dragImg);
+        var clickX1=EO.pageX-imgPos1.left;
+        var clickY1=EO.pageY-imgPos1.top;
+        dragImg.style.top = clickY1+imgPos1.top-clickY+'px';
+        dragImg.style.left = clickX1+imgPos1.left-clickX+'px';
+        let imgOfW = img.offsetWidth;
+        img.style.width = imgOfW+'px';
+        img.style.height = img.offsetHeight+clickY1-clickY+'px';
+        
+    }
+}
+    
+function mousedown(EO) {
+    EO=EO||window.event;
+    EO.preventDefault();
+    let imgPos = getElementPos(this);
+    dragImg  = this;
+    dragImg.style.cursor = 'move';
+    clickX=Math.round(EO.pageX-imgPos.left);
+    clickY=Math.round(EO.pageY-imgPos.top);
+}
+function mouseup(EO) {
+    EO=EO||window.event;
+    EO.preventDefault();
+    dragImg.style.cursor = 'default';
+    dragImg = null;
+    
+}
