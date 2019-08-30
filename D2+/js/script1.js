@@ -59,8 +59,6 @@ function mousedown(EO) {
     img.style.cursor = 'move';
     clickX=Math.round(EO.pageX-imgPos.left);
     clickY=Math.round(EO.pageY-imgPos.top);
-    x1 = EO.pageX;
-    y1 = EO.pageY;
 }
 function mouseup(EO) {
     EO=EO||window.event;
@@ -125,8 +123,6 @@ setResizeElemPos();
 var dragImg;
 var clickX;
 var clickY;
-var x1;
-var y1;
 let resizeItems = document.getElementsByClassName('resize');
 for(let i=0; i<8; i++) {
     resizeItems[i].addEventListener('mousedown', mousedown, false);
@@ -183,6 +179,8 @@ function resize(EO) {
         let clickX1=EO.pageX-imgPos1.left;
         let clickY1=EO.pageY-imgPos1.top;
         if(clickX1>clickY1) {
+            console.log(clickX1);
+            console.log(clickX);
             img.style.width = imgOfW+clickX1-clickX+'px';
             img.style.height = imgOfH+clickX1-clickX+'px';
         }
@@ -190,6 +188,7 @@ function resize(EO) {
             img.style.height = imgOfH+clickY1-clickY+'px';
             img.style.width = imgOfW+clickY1-clickY+'px';
         }
+        
         setResizeElemPos();
     }
     if(dragImg && dragImg.classList.contains('resize0')) {
@@ -208,26 +207,7 @@ function resize(EO) {
             img.style.top = clickY1+imgPos1.top-clickY+'px';
             img.style.left = clickY1+imgPos1.left-clickY+'px';
         }
-        setResizeElemPos();
-    }
-    if(dragImg && dragImg.classList.contains('resize2')) {
-        let imgPos1 = getElementPos(dragImg);
-        let imgPos2 = getElementPos(img);
-        let clickX1=EO.pageX-imgPos1.left;
-        let clickY1=EO.pageY-imgPos1.top;
-            img.style.height = imgOfH-clickY1+clickY+'px';
-            img.style.width = imgOfW-clickY1+clickY+'px';
-            img.style.top = clickY1+imgPos2.top-clickY+'px';
-        setResizeElemPos();
-    }
-    if(dragImg && dragImg.classList.contains('resize6')) {
-        let imgPos1 = getElementPos(dragImg);
-        let imgPos2 = getElementPos(img);
-        let clickX1=EO.pageX-imgPos1.left;
-        let clickY1=EO.pageY-imgPos1.top;
-            img.style.height = imgOfH-clickX1+clickX+'px';
-            img.style.width = imgOfW-clickX1+clickX+'px';
-            img.style.left = clickX1+imgPos2.left-clickX+'px';
+        
         setResizeElemPos();
     }
 
