@@ -41,7 +41,7 @@ var menu=[
             item.setAttribute('target', 'blank');
         }
         if('submenu' in arr[i]) {
-            let text = arr[i].name + '<span>&darr;</span>';
+            let text = arr[i].name + '&darr;';
             item.innerHTML = text;
             item.addEventListener('mouseenter', function(EO) {showSubMenu(EO, arr[i].submenu)}, false);
             item.addEventListener('mouseleave', hideSubMenu, false);
@@ -68,7 +68,7 @@ function showSubMenu(EO, arr1) {
             item.setAttribute('target', 'blank');
         }
         if('submenu' in arr1[i]) {
-            let text = arr1[i].name + '<span>&rarr;</span>';
+            let text = arr1[i].name + '&rarr;';
             item.innerHTML = text;
             item.addEventListener('mouseenter', function(EO) {showSubMenuRight(EO, arr1[i].submenu)}, false);
             item.addEventListener('mouseleave', hideSubMenu, false);
@@ -95,7 +95,7 @@ function showSubMenuRight(EO, arr1) {
             item.setAttribute('target', 'blank');
         }
         if('submenu' in arr1[i]) {
-            let text = arr1[i].name + '<span>&rarr;</span>';
+            let text = arr1[i].name + '&rarr;';
             item.innerHTML = text;
             item.addEventListener('mouseenter', function(EO) {showSubMenuRight(EO, arr1[i].submenu)}, false);
             item.addEventListener('mouseleave', hideSubMenu, false);
@@ -104,8 +104,9 @@ function showSubMenuRight(EO, arr1) {
     }
 }
 function hideSubMenu(EO) {
-    let subMenu = document.getElementsByClassName('subMenuLink');
-    for(let i=0; i<subMenu.length; i++) {
-        subMenu[i].classList.add('hide');
+    EO=EO||window.event;
+    EO.preventDefault();
+    for(let i=EO.target.children.length-1; i>=0; i--) {
+        EO.target.children[i].remove();
     }
 }

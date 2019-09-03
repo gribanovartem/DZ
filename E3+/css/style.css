@@ -19,13 +19,9 @@
     line-height:50px;
     display: block; 
     border-right: 1px solid #F36262;
-    -moz-transition: all 0.3s 0.01s ease;
-    -o-transition: all 0.3s 0.01s ease;
-    -webkit-transition: all 0.3s 0.01s ease;
   }
 .subMenuLink {
     width: 200px;
-    /* border-top: 1px solid #F36262; */
     position: absolute;
     text-decoration: none;
     background:#FF4444;
@@ -42,9 +38,6 @@
 .subMenuLink:hover {
     background:#D43737;
     cursor: pointer;
-}
-span {
-    padding-left: 10px;
 }
 .hide {
     display: none;
