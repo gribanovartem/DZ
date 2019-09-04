@@ -48,65 +48,64 @@ var menu=[
         }
         li.appendChild(item); 
     }
-    
+    function showSubMenu(EO, arr1) {
+      EO=EO||window.event;
+      EO.preventDefault();
+      let top = 50;
+      for(let i=0; i<arr1.length; i++) {
+          let li = document.createElement('li');
+          EO.target.appendChild(li); 
+          let item = document.createElement('a');
+          item.classList.add('subMenuLink');
+          item.textContent = arr1[i].name;
+          item.style.top = top + 'px';
+          top += 50;
+          if('url' in arr1[i]) {
+              item.setAttribute('href', arr1[i].url);
+              item.setAttribute('target', 'blank');
+          }
+          if('submenu' in arr1[i]) {
+              let text = arr1[i].name + '&rarr;';
+              item.innerHTML = text;
+              item.addEventListener('mouseenter', function(EO) {showSubMenuRight(EO, arr1[i].submenu)}, false);
+              item.addEventListener('mouseleave', hideSubMenu, false);
+          }
+          li.appendChild(item); 
+      }
   }
+  function showSubMenuRight(EO, arr1) {
+      EO=EO||window.event;
+      EO.preventDefault();
+      let left = 230;
+      let top = 0;
+      for(let i=0; i<arr1.length; i++) {
+          let li = document.createElement('li');
+          EO.target.appendChild(li); 
+          let item = document.createElement('a');
+          item.classList.add('subMenuLink');
+          item.textContent = arr1[i].name;
+          item.style.left = left + 'px';
+          item.style.top = top + 'px';
+          top += 50;
+          if('url' in arr1[i]) {
+              item.setAttribute('href', arr1[i].url);
+              item.setAttribute('target', 'blank');
+          }
+          if('submenu' in arr1[i]) {
+              let text = arr1[i].name + '&rarr;';
+              item.innerHTML = text;
+              item.addEventListener('mouseenter', function(EO) {showSubMenuRight(EO, arr1[i].submenu)}, false);
+              item.addEventListener('mouseleave', hideSubMenu, false);
+          }
+          li.appendChild(item); 
+      }
+  }
+  function hideSubMenu(EO) {
+      EO=EO||window.event;
+      EO.preventDefault();
+      for(let i=EO.target.children.length-1; i>=0; i--) {
+          EO.target.children[i].remove();
+      }
+  }
+}
 showMenu(menu);
-function showSubMenu(EO, arr1) {
-    EO=EO||window.event;
-    EO.preventDefault();
-    let top = 50;
-    for(let i=0; i<arr1.length; i++) {
-        let li = document.createElement('li');
-        EO.target.appendChild(li); 
-        let item = document.createElement('a');
-        item.classList.add('subMenuLink');
-        item.textContent = arr1[i].name;
-        item.style.top = top + 'px';
-        top += 50;
-        if('url' in arr1[i]) {
-            item.setAttribute('href', arr1[i].url);
-            item.setAttribute('target', 'blank');
-        }
-        if('submenu' in arr1[i]) {
-            let text = arr1[i].name + '&rarr;';
-            item.innerHTML = text;
-            item.addEventListener('mouseenter', function(EO) {showSubMenuRight(EO, arr1[i].submenu)}, false);
-            item.addEventListener('mouseleave', hideSubMenu, false);
-        }
-        li.appendChild(item); 
-    }
-}
-function showSubMenuRight(EO, arr1) {
-    EO=EO||window.event;
-    EO.preventDefault();
-    let left = 230;
-    let top = 0;
-    for(let i=0; i<arr1.length; i++) {
-        let li = document.createElement('li');
-        EO.target.appendChild(li); 
-        let item = document.createElement('a');
-        item.classList.add('subMenuLink');
-        item.textContent = arr1[i].name;
-        item.style.left = left + 'px';
-        item.style.top = top + 'px';
-        top += 50;
-        if('url' in arr1[i]) {
-            item.setAttribute('href', arr1[i].url);
-            item.setAttribute('target', 'blank');
-        }
-        if('submenu' in arr1[i]) {
-            let text = arr1[i].name + '&rarr;';
-            item.innerHTML = text;
-            item.addEventListener('mouseenter', function(EO) {showSubMenuRight(EO, arr1[i].submenu)}, false);
-            item.addEventListener('mouseleave', hideSubMenu, false);
-        }
-        li.appendChild(item); 
-    }
-}
-function hideSubMenu(EO) {
-    EO=EO||window.event;
-    EO.preventDefault();
-    for(let i=EO.target.children.length-1; i>=0; i--) {
-        EO.target.children[i].remove();
-    }
-}
