@@ -1,0 +1,25 @@
+.table {
+    position: relative;
+    background-color: #F0EE7E;
+    border: 1px solid black;
+    margin: 0 auto;
+}
+#score {
+    font-size: 55px;
+    font-weight: bold;
+    font-family: monospace;
+    margin-left: 237px;
+}
+#start {
+    margin-left: 609px;
+}
+#racketLeft {
+background-color: #09AA57;
+}
+#racketRight {
+background-color: #191497;
+}
+#ball {
+    background-color: red;
+    border-radius: 50%;
+}
