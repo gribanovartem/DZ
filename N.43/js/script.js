@@ -20,7 +20,7 @@ function setTennis() {
 
     var racketLeft1 = {
         posY : tableHeight/2 - tableHeight/4/2,
-        speedY : 10,
+        speedY : 0,
 
         update : function() {
             let racketLeft=document.getElementById('racketLeft');
@@ -30,7 +30,7 @@ function setTennis() {
     };
     var racketRight1 = {
         posY : tableHeight/2 - tableHeight/4/2,
-        speedY : 10,
+        speedY : 0,
 
         update : function() {
             let racketRight=document.getElementById('racketRight');
@@ -59,58 +59,42 @@ function setTennis() {
 
     document.addEventListener('keydown', keydown, false);
     document.addEventListener('keyup', keyup, false);
-    let event ={};
     function keydown(EO) {
         EO=EO||window.event;
         EO.preventDefault();
         if(EO.code == 'ShiftLeft') {
-            event.shift = true;
+            racketLeft1.speedY = -5;
         }
         if(EO.code == 'ControlLeft') {
-            event.control = true;
+            racketLeft1.speedY = 5;
         }
         if(EO.code == 'ArrowUp') {
-            event.arrup = true;
+            racketRight1.speedY = -5;
         }
         if(EO.code == 'ArrowDown') {
-            event.arrdown = true;
+            racketRight1.speedY = 5;
         }
-
-        if(event.shift && racketLeft1.posY>0) {
-            racketLeft1.posY-=racketLeft1.speedY;
-        }
-        if(event.control && racketLeft1.posY<tableHeight-tableHeight/4) {
-            racketLeft1.posY+=racketLeft1.speedY;
-        }
-        if(event.arrup && racketRight1.posY>0) {
-            racketRight1.posY-=racketRight1.speedY;
-        }
-        if(event.arrdown && racketRight1.posY<tableHeight-tableHeight/4) {
-            racketRight1.posY+=racketRight1.speedY;
-        }
-
-        racketLeft1.update();
-        racketRight1.update();
+       
     }
     function keyup(EO) {
         EO=EO||window.event;
         EO.preventDefault();
         if(EO.code == 'ShiftLeft') {
-            event.shift = false;
+            racketLeft1.speedY = 0;
         }
         if(EO.code == 'ControlLeft') {
-            event.control = false;
+            racketLeft1.speedY = 0;
         }
         if(EO.code == 'ArrowUp') {
-            event.arrup = false;
+            racketRight1.speedY = 0;
         }
         if(EO.code == 'ArrowDown') {
-            event.arrdown = false;
+            racketRight1.speedY = 0;
         }
     }
     let start = document.getElementById('start');
     start.addEventListener('click', tick, false);
-    let speedX1 = [2,-2];
+    let speedX1 = [4,-4];
     let speedY1 = [2,3,4,-2,-3,-4,];
     
     var ballH={
@@ -134,11 +118,11 @@ function setTennis() {
         let rightPos = getElementPos(racketRight);
         ballH.posX+=ballH.speedX;
         ballH.posY+=ballH.speedY;
-        if(ballH.posX+ballH.width>tableWidth-tableWidth/60 && ballH.posY>rightPos.top && ballH.posY+ballH.height<rightPos.top+tableWidth/4) {
+        if(ballH.posX+ballH.width>tableWidth-tableWidth/60 && ballH.posY+ballH.height/2>rightPos.top && ballH.posY+ballH.height<rightPos.top+tableHeight/4+ballH.height/2) {
             ballH.speedX = -ballH.speedX;
             ballH.posX = tableWidth-tableWidth/60-ballH.width;
         }
-        if(ballH.posX<tableWidth/60 && ballH.posY>leftPos.top && ballH.posY+ballH.height<leftPos.top+tableWidth/4) {
+        if(ballH.posX<tableWidth/60 && ballH.posY+ballH.height/2>leftPos.top && ballH.posY+ballH.height<leftPos.top+tableHeight/4+ballH.height/2) {
             ballH.speedX = -ballH.speedX;
             ballH.posX = tableWidth/60;
         }
@@ -168,7 +152,23 @@ function setTennis() {
             ballH.speedY=-ballH.speedY;
             ballH.posY=0;
         }
+        racketLeft1.posY += racketLeft1.speedY;
+        racketRight1.posY += racketRight1.speedY;
+        if(racketLeft1.posY<0) {
+            racketLeft1.posY = 0;
+        }
+        if(racketLeft1.posY>tableHeight-tableHeight/4) {
+            racketLeft1.posY = tableHeight-tableHeight/4;
+        }
+        if(racketRight1.posY<0) {
+            racketRight1.posY = 0;
+        }
+        if(racketRight1.posY>tableHeight-tableHeight/4) {
+            racketRight1.posY = tableHeight-tableHeight/4;
+        }
         
+        racketLeft1.update();
+        racketRight1.update();
         ballH.update();
         requestAnimationFrame(tick);
     }
