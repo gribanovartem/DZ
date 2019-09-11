@@ -1,0 +1,13 @@
+#score {
+    font-size: 55px;
+    font-weight: bold;
+    font-family: monospace;
+    margin-left: 237px;
+}
+#start {
+    margin-left: 523px;
+}
+#table {
+    display: block;
+    margin: 0 auto;
+}
