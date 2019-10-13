@@ -1,7 +1,15 @@
-button {
+.drink button {
     width: 250px;
     height: 60px;
     background-color: #5c8286;
+    border: none;
+    margin: 20px;
+    color: #ffffff;
+}
+.food button {
+    width: 250px;
+    height: 60px;
+    background-color: rgb(46, 95, 80);
     border: none;
     margin: 20px;
     color: #ffffff;

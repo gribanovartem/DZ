@@ -21,7 +21,6 @@ function HashStorage() {
        return Object.keys(self.storage);
     };
 }
-var drinkStorage = new HashStorage();
 
 function addDrink() {
     var drinkName = prompt("Название напитка");
@@ -50,4 +49,33 @@ function deleteDrink() {
 }
 function getAllDrinks() {
     alert(drinkStorage.getKeys());
+}
+
+function addFood() {
+    var foodName = prompt("Название блюда");
+    var food = {};
+    food.time = (confirm("Оно долго готовится?"))?'да':'нет';
+    food.recipe = prompt("Как его приготовить?");
+    foodStorage.addValue(foodName, food);
+    return foodStorage;
+}
+function getFood() {
+    var foodName = prompt('Про какое блюдо вы хотите узнать?');
+    var food = foodStorage.getValue(foodName);
+    if(food) {
+        alert(`        блюдо:  ${foodName}
+        долго готовится: ${food.time}
+        рецепт приготовления:  ${food.recipe}`);
+    } else {
+        alert('Такого блюда нет в базе данных!');
+    }
+}
+function deleteFood() {
+    var foodName = prompt('Какое блюдо вы хотите удалить?');
+        if(foodStorage.deleteValue(foodName)) {
+            return alert('Блюдо '+foodName+' удалено!');
+        } else return alert('Такого блюда нет в базе данных!');
+}
+function getAllFood() {
+    alert(foodStorage.getKeys());
 }
