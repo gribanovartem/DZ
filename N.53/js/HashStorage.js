@@ -21,7 +21,7 @@ function HashStorage() {
        return Object.keys(self.storage);
     };
 }
-// var drinkStorage = new HashStorage();
+var drinkStorage = new HashStorage();
 
 function addDrink() {
     var drinkName = prompt("Название напитка");

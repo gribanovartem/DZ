@@ -1,0 +1,15 @@
+button {
+    width: 250px;
+    height: 60px;
+    background-color: #5c8286;
+    border: none;
+    margin: 20px;
+    color: #ffffff;
+}
+body {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    width: 600px;
+    margin: 0 auto;
+}
