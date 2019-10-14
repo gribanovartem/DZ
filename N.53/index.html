@@ -8,13 +8,22 @@
     <title>Document</title>
 </head>
 <body>
-    <button id="add" onclick="addDrink()">Ввод информации о напитке</button>
-    <button id="getV" onclick="getDrink()">Получение информации о напитке</button>
-    <button id="del" onclick="deleteDrink()">Удаление информации о напитке</button>
-    <button id="getK" onclick="getAllDrinks();">Преречень всех напитков</button>
+    <div class='drink'>
+        <button id="add" onclick="addDrink()">Ввод информации о напитке</button>
+        <button id="getV" onclick="getDrink()">Получение информации о напитке</button>
+        <button id="del" onclick="deleteDrink()">Удаление информации о напитке</button>
+        <button id="getK" onclick="getAllDrinks();">Преречень всех напитков</button>
+    </div>
+    <div class='food'>
+        <button id="add1" onclick="addFood()">Ввод информации о блюде</button>
+        <button id="getV1" onclick="getFood()">Получение информации о блюде</button>
+        <button id="del1" onclick="deleteFood()">Удаление информации о блюде</button>
+        <button id="getK1" onclick="getAllFood();">Преречень всех блюд</button>
+    </div>
 
 
     
     <script src="js/HashStorage.js"></script>
+    <script src="js/LocStorage.js"></script>
 </body>
 </html>
