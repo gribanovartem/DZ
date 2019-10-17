@@ -5,3 +5,6 @@
 .container div {
     position: relative;
 }
+svg {
+    display: block;
+}

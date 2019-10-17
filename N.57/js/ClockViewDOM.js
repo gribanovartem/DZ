@@ -3,8 +3,8 @@ function ClockViewDOM() {
     this.GMT = null;
     var myField = null; // внутри какого элемента DOM наша вёрстка
     var hourArrow = null;
-    this.minutesArrow = null;
-    this.secondsArrow = null;
+    var minutesArrow = null;
+    var secondsArrow = null;
     this.clockRadius = 200; // Радиус циферблата
     this.start=function(model,field,GMT) {
         myModel=model;
@@ -91,15 +91,10 @@ function ClockViewDOM() {
 
     };
     this.update = function() {
-       
         this.time = myModel.getTime(this.GMT);
-        console.log(hourArrow);
-        // this.hourArrow = myField.getElementsByClassName('hourArrow')[0];
         this.currHours = this.time.hours>12?this.time.hours-12:this.time.hours;
         hourArrow.style.transform = 'rotate(' + ((this.currHours+(this.time.minutes/60))*360/12) + 'deg)';
-        // this.minutesArrow = myField.getElementsByClassName('minutesArrow')[0];
         minutesArrow.style.transform = 'rotate(' + (this.time.minutes*360/60) + 'deg)';
-        // this.secondsArrow = myField.getElementsByClassName('secondsArrow')[0];
         secondsArrow.style.transform = 'rotate(' + ((this.time.milliseconds+(this.time.seconds*1000)+(this.time.minutes*60000))*360/60/1000) + 'deg)';
     };
 
