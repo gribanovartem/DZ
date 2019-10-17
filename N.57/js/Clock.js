@@ -23,7 +23,7 @@ function Clock() {
         // if(myView) {
         //     this.updateView();
         // }
-       this.timer = setTimeout( ()=> { this.updateView(); }, 1000);
+       this.timer = setInterval( ()=> { this.updateView(); }, 1000);
     };
     this.setClock = function() {
         if ( myView ) {
