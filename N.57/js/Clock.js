@@ -20,10 +20,8 @@ function Clock() {
 
     this.start=function(view) {
         myView=view;
-        // if(myView) {
-        //     this.updateView();
-        // }
-       this.timer = setInterval( ()=> { this.updateView(); }, 1000);
+        this.milliseconds = new Date().getMilliseconds()
+       this.timer = setInterval( ()=> { this.updateView(); }, 1010 - this.milliseconds);
     };
     this.setClock = function() {
         if ( myView ) {
