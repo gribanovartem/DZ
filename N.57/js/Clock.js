@@ -1,5 +1,5 @@
 function Clock() {
-    this.view = null;
+    var myView = null;
     this.timer = null;
     this.GMT = null;
     this.getTime = function(GMT) {
@@ -23,7 +23,7 @@ function Clock() {
         // if(myView) {
         //     this.updateView();
         // }
-        this.timer = setTimeout(this.updateView, 1010-this.milliseconds);
+       this.timer = setTimeout( ()=> { this.updateView(); }, 1000);
     };
     this.setClock = function() {
         if ( myView ) {
