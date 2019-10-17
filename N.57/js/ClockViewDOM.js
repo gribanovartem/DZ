@@ -3,8 +3,8 @@ function ClockViewDOM() {
     this.GMT = null;
     var myField = null; // внутри какого элемента DOM наша вёрстка
     var hourArrow = null;
-    this.minutesArrow = null;
-    this.secondsArrow = null;
+    var minutesArrow = null;
+    var secondsArrow = null;
     this.clockRadius = 200; // Радиус циферблата
     this.start=function(model,field,GMT) {
         myModel=model;
