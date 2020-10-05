@@ -36,7 +36,7 @@ function LocStorage(name) {
         self.storage.name = JSON.parse(localStorage.getItem(name));
         let keys =[];
         for(let i=0; i<self.storage.name.length; i++) {
-          console.log(Object.keys(self.storage.name[i]))
+          console.log(Object.keys(self.storage.name[i]));
             keys.push(Object.keys(self.storage.name[i])[0]);
         }
         return keys;

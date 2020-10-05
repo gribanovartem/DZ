@@ -5,7 +5,7 @@ function randomDiap(n,m) {
 }
 function mood(colorsCount) {
     var colors=[ '', 'красный', 'оранжевый', 'жёлтый', 'зелёный', 'голубой', 'синий', 'фиолетовый' ];
-    var colorsObj = {};
+    let colorsObj = {};
     console.log( 'цветов: ' + colorsCount );
         do {
             var n=randomDiap(1,7);
